@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import InputComponent from "./components/InputComponent"
 
 function App() {
+
+  const [todos, setTodos] = useState([])
+
+
+  const onChange = (value) => {
+    setTodos([...todos, value])
+  }
+
+  const listTodos = () => {
+    console.log("List to function has been initiated");
+    todos.map((value, i) => console.log(i + " => ", value))
+
+  }
+
+  useEffect(() => {
+    listTodos()
+  }, [todos])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TODO APP</h1>
+      <InputComponent onChange={onChange}/>
     </div>
   );
 }
